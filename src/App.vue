@@ -1,6 +1,22 @@
 <template>
-  <div>
+
+  <div v-if="showUI" class="renderer-container" ref="rendererContainer">
+    <div class="render-btn-container">
+      <div class="buttons">
+        <button @click="renderClicked('render')">Render</button>
+        <button @click="renderClicked('bake')">Bake</button>
+      </div>
+    </div>
+
+    <div class="footer-btn-container">
+      <div class="status">
+        <button @click="statusClicked">Check Status</button>
+        <label>{{status}}</label>
+      </div>
+      <button @click="downloadClicked">Download Result</button>
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -13,8 +29,11 @@ export default {
   },
   data() {
     return {
+      status: "",
       scene: null,
+      jobID: null,
       camera: null,
+      showUI: true,
     }
   },
   mounted() {
@@ -26,6 +45,18 @@ export default {
       const {scene, camera} = await createScene(canvas);
       this.scene = scene;
       this.camera = camera;
+    },
+    async renderClicked(mode) {
+      // this.showUI = false;
+      console.log(mode)
+    },
+    async statusClicked() {
+      // this.showUI = false;
+      console.log("status")
+    },
+    async downloadClicked() {
+      // this.showUI = false;
+      console.log("download")
     },
     getCanvas(){
       const canvases = document.querySelectorAll('canvas');

@@ -1,0 +1,30 @@
+.renderer-container {
+    width: 100%;
+    height: 100%;
+}
+
+.render-btn-container {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; /* Centers the child elements horizontally */
+    border-radius: 4px;
+    padding: 0 8px;
+}
+
+.footer-btn-container {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; /* Centers the child elements horizontally */
+    border-radius: 4px;
+    padding: 0 8px;
+}
