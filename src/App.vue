@@ -5,11 +5,17 @@
 
 <script>
 
-import {startDemo} from "@/scripts/demo";
+import {createScene} from "@/scripts/demo";
 
 export default {
   name: 'App',
   components: {
+  },
+  data() {
+    return {
+      scene: null,
+      camera: null,
+    }
   },
   mounted() {
     this.start();
@@ -17,7 +23,9 @@ export default {
   methods: {
     async start(){
       const canvas = this.getCanvas();
-      await startDemo(canvas);
+      const {scene, camera} = await createScene(canvas);
+      this.scene = scene;
+      this.camera = camera;
     },
     getCanvas(){
       const canvases = document.querySelectorAll('canvas');
