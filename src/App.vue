@@ -10,7 +10,7 @@
 
     <div class="footer-btn-container">
       <div class="status">
-        <button @click="statusClicked">Check Status</button>
+        <button @click="statusClicked">Refresh Status</button>
         <label>{{status}}</label>
       </div>
       <button @click="downloadClicked">Download Result</button>

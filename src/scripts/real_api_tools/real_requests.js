@@ -95,7 +95,7 @@ async function putResponse(uri, scene){
 }
 
 
-export async function downloadImage(imageUrl) {
+export async function downloadImage(jobID, imageUrl) {
     try {
         console.log(imageUrl)
         const response = await fetch(imageUrl);
@@ -106,12 +106,12 @@ export async function downloadImage(imageUrl) {
             const dataUrl = reader.result;
             const link = document.createElement('a');
             link.href = dataUrl;
-            link.download = 'downloaded_image.jpg'; // Set desired file name
+            link.download = `${jobID}.jpg`; // Set desired file name
             link.click();
         };
         reader.readAsDataURL(blob);
     }
     catch (error) {
-        console.error('Error downloading image:', error);
+        ConsoleError(`Error downloading image: ${error}`);
     }
 }

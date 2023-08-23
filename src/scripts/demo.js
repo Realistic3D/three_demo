@@ -1,7 +1,7 @@
 import * as REAL from "real_api";
 import {getThreeScene} from "@/scripts/three_tools/three_scene";
 import {loadDemoModel} from "@/scripts/three_tools/load_demo";
-import {loadAreaLights} from "@/scripts/real_api_tools/real_lights";
+import {loadAreaLights, loadSunLight} from "@/scripts/real_api_tools/real_lights";
 import {ConsoleError, ConsoleWarning} from "@/scripts/common_tools/console_tools";
 import {
     downloadImage,
@@ -16,6 +16,7 @@ import {
 export async function createScene(canvas) {
     const {scene, camera} = getThreeScene(canvas);
     loadDemoModel(scene);
+    loadSunLight(scene);
     loadAreaLights(scene);
     return {scene, camera};
 }
@@ -24,6 +25,7 @@ export async function renderScene(app, renderMode) {
     if (app.waiting) return ConsoleWarning("Please wait for job to finish");
     const scene = app.scene;
     const camera = app.camera;
+
     const isBakeMode = renderMode === "bake";
 
     //Step 1: Get scene
@@ -61,6 +63,9 @@ export async function downloadJob(app) {
     const data = response.data;
     const status = data.status;
     if(status !== "COMPLETED") return ConsoleWarning("Job is not completed yet!");
-    await downloadImage(data.url);
-    // app.setStatus(response.status);
+    await saveImage(jobID, data.url);
+}
+
+async function saveImage(jobID, url) {
+    await downloadImage(jobID, url);
 }
