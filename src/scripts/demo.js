@@ -15,7 +15,6 @@ export async function createScene(canvas) {
 
 export async function renderScene(app, renderMode) {
     if (app.waiting) return ConsoleWarning("Please wait for job to finish");
-    app.showUI = false;
     const scene = app.scene;
     const camera = app.camera;
     const isBakeMode = renderMode === "bake";

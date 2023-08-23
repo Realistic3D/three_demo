@@ -48,7 +48,9 @@ export default {
       this.camera = camera;
     },
     async renderClicked(mode) {
+      this.showUI = false;
       await renderScene(this, mode)
+      this.showUI = false;
     },
     async statusClicked() {
       // this.showUI = false;
