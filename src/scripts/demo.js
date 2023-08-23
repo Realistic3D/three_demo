@@ -15,8 +15,8 @@ import {loadBaked} from "@/scripts/three_tools/load_baked";
 
 
 export async function createScene(canvas) {
-    const {scene, camera} = getThreeScene(canvas);
-    loadDemoModel(scene);
+    const {scene, camera, controls} = getThreeScene(canvas);
+    loadDemoModel(scene, controls);
     loadSunLight(scene);
     loadAreaLights(scene);
     return {scene, camera};

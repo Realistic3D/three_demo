@@ -26,7 +26,7 @@ export function getThreeScene(canvas) {
 
     renderLoop(scene, renderer, camera, controls);
 
-    return {scene, camera};
+    return {scene, camera, controls};
 }
 
 function renderLoop(scene, renderer, camera, controls){
