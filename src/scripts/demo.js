@@ -2,8 +2,15 @@ import * as REAL from "real_api";
 import {getThreeScene} from "@/scripts/three_tools/three_scene";
 import {loadDemoModel} from "@/scripts/three_tools/load_demo";
 import {loadAreaLights} from "@/scripts/real_api_tools/real_lights";
-import {ConsoleWarning} from "@/scripts/common_tools/console_tools";
-import {newJobRequest, uploadJob} from "@/scripts/real_api_tools/real_requests";
+import {ConsoleError, ConsoleWarning} from "@/scripts/common_tools/console_tools";
+import {
+    downloadImage,
+    getJobResult,
+    jobStatus,
+    newJobRequest,
+    submitJob,
+    uploadJob
+} from "@/scripts/real_api_tools/real_requests";
 
 
 export async function createScene(canvas) {
@@ -32,7 +39,28 @@ export async function renderScene(app, renderMode) {
     if(!uploaded) return app.setStatus("Uploading FAILED");
 
     //Step 3: Submit job
-    const response = await this.submitJob(jobID);
-    if(response.msg === "SUCCESS") app.setStatus(response.status);
+    const response = await submitJob(jobID);
+    if(response.msg === "SUCCESS") app.setStatus(response.data.status);
     else app.setStatus("FAILED");
+
+    app.setJobId(jobID, renderMode);
+}
+
+export async function checkStatus(app) {
+    const jobID = app.jobID;
+    const response = await jobStatus(jobID);
+    app.setStatus(response.data.status);
+}
+
+export async function downloadJob(app) {
+    // const mode = app.mode;
+    const jobID = app.jobID;
+    if(!jobID) return ConsoleWarning("No job");
+    const response = await getJobResult(jobID);
+    if(!response || !response.data) return ConsoleError(response.msg);
+    const data = response.data;
+    const status = data.status;
+    if(status !== "COMPLETED") return ConsoleWarning("Job is not completed yet!");
+    await downloadImage(data.url);
+    // app.setStatus(response.status);
 }

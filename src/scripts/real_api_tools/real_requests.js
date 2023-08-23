@@ -24,9 +24,8 @@ export async function newJobRequest(bakeMode) {
         }
     }
     const response = await postResponse(params);
-    const jobID = response.jobID;
-    const uri = response.url;
-    return (jobID && uri) ? response : null;
+    if(response.data && response.data.jobID) return response.data;
+    ConsoleError(response.msg);
 }
 
 export async function uploadJob(uri, renderScene) {
@@ -41,6 +40,36 @@ export async function submitJob(jobID) {
             "prodKey": ProdKey
         },
         "ask": "submit",
+        "service": {
+            "jobID": jobID
+        }
+    }
+    return await postResponse(params);
+}
+
+export async function jobStatus(jobID) {
+    const params = {
+        "prodCred": {
+            "insID": InsID,
+            "appKey": AppKey,
+            "prodKey": ProdKey
+        },
+        "ask": "status",
+        "service": {
+            "jobID": jobID
+        }
+    }
+    return await postResponse(params);
+}
+
+export async function getJobResult(jobID) {
+    const params = {
+        "prodCred": {
+            "insID": InsID,
+            "appKey": AppKey,
+            "prodKey": ProdKey
+        },
+        "ask": "result",
         "service": {
             "jobID": jobID
         }
@@ -65,3 +94,24 @@ async function putResponse(uri, scene){
     }
 }
 
+
+export async function downloadImage(imageUrl) {
+    try {
+        console.log(imageUrl)
+        const response = await fetch(imageUrl);
+        const blob = await response.blob();
+
+        const reader = new FileReader();
+        reader.onload = () => {
+            const dataUrl = reader.result;
+            const link = document.createElement('a');
+            link.href = dataUrl;
+            link.download = 'downloaded_image.jpg'; // Set desired file name
+            link.click();
+        };
+        reader.readAsDataURL(blob);
+    }
+    catch (error) {
+        console.error('Error downloading image:', error);
+    }
+}

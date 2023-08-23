@@ -21,7 +21,7 @@
 
 <script>
 
-import {createScene, renderScene} from "@/scripts/demo";
+import {checkStatus, createScene, downloadJob, renderScene} from "@/scripts/demo";
 
 export default {
   name: 'App',
@@ -30,6 +30,7 @@ export default {
   data() {
     return {
       status: "",
+      mode: null,
       scene: null,
       jobID: null,
       camera: null,
@@ -46,19 +47,34 @@ export default {
       const {scene, camera} = await createScene(canvas);
       this.scene = scene;
       this.camera = camera;
+      await this.loadCache();
+    },
+    async loadCache() {
+      const jobID = localStorage.getItem('jobID');
+      if(!jobID) return;
+      this.mode = localStorage.getItem('mode');
+      this.jobID = jobID;
+      await this.statusClicked();
+    },
+    setJobId(jobID, mode) {
+      this.mode = mode;
+      this.jobID = jobID;
+      localStorage.setItem("mode", mode);
+      localStorage.setItem("jobID", jobID);
     },
     async renderClicked(mode) {
       this.showUI = false;
       await renderScene(this, mode)
-      this.showUI = false;
+      this.showUI = true;
     },
     async statusClicked() {
-      // this.showUI = false;
-      console.log("status")
+      if(!this.jobID) return;
+      await checkStatus(this)
     },
     async downloadClicked() {
-      // this.showUI = false;
-      console.log("download")
+      this.showUI = false;
+      await downloadJob(this);
+      this.showUI = true;
     },
     setStatus(status) {
       this.status = status.toString();
