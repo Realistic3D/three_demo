@@ -28,3 +28,35 @@
     border-radius: 4px;
     padding: 0 8px;
 }
+
+.header-btn-container {
+    position: fixed;
+    /*top: 10px;*/
+    /*left: 50%;*/
+    /*transform: translateX(-50%);*/
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; /* Centers the child elements horizontally */
+    border-radius: 4px;
+    padding: 0 8px;
+}
+
+.status-label {
+    position: relative;
+    background: aliceblue;
+    left: 10px;
+    top: 1px;
+}
+
+.status {
+    position: relative;
+    top: 10px;
+    left: 10px;
+}
+
+.download {
+    position: relative;
+    top: 50px;
+    left: 10px;
+}

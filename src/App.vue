@@ -8,13 +8,22 @@
       </div>
     </div>
 
-    <div class="footer-btn-container">
+<!--    <div class="footer-btn-container">-->
+    <div class="header-btn-container">
+
       <div class="status">
         <button @click="statusClicked">Refresh Status</button>
-        <label>{{status}}</label>
+        <label class="status-label">{{status}}</label>
       </div>
-      <button @click="downloadClicked">Download Result</button>
+
     </div>
+    <div class="header-btn-container">
+
+      <div class="download">
+        <button @click="downloadClicked">Download Result</button>
+      </div>
+    </div>
+
   </div>
 
 </template>
