@@ -21,7 +21,7 @@
 
 <script>
 
-import {createScene} from "@/scripts/demo";
+import {createScene, renderScene} from "@/scripts/demo";
 
 export default {
   name: 'App',
@@ -34,6 +34,7 @@ export default {
       jobID: null,
       camera: null,
       showUI: true,
+      waiting: false,
     }
   },
   mounted() {
@@ -47,8 +48,7 @@ export default {
       this.camera = camera;
     },
     async renderClicked(mode) {
-      // this.showUI = false;
-      console.log(mode)
+      await renderScene(this, mode)
     },
     async statusClicked() {
       // this.showUI = false;
@@ -57,6 +57,9 @@ export default {
     async downloadClicked() {
       // this.showUI = false;
       console.log("download")
+    },
+    setStatus(status) {
+      this.status = status.toString();
     },
     getCanvas(){
       const canvases = document.querySelectorAll('canvas');
