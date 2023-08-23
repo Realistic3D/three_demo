@@ -11,6 +11,7 @@ import {
     submitJob,
     uploadJob
 } from "@/scripts/real_api_tools/real_requests";
+import {loadBaked} from "@/scripts/three_tools/load_baked";
 
 
 export async function createScene(canvas) {
@@ -55,7 +56,7 @@ export async function checkStatus(app) {
 }
 
 export async function downloadJob(app) {
-    // const mode = app.mode;
+    const mode = app.mode;
     const jobID = app.jobID;
     if(!jobID) return ConsoleWarning("No job");
     const response = await getJobResult(jobID);
@@ -63,7 +64,12 @@ export async function downloadJob(app) {
     const data = response.data;
     const status = data.status;
     if(status !== "COMPLETED") return ConsoleWarning("Job is not completed yet!");
-    await saveImage(jobID, data.url);
+    if(mode === "bake") await replaceBakedScene(app, data.url);
+    else await saveImage(jobID, data.url);
+}
+
+async function replaceBakedScene(app, url) {
+    await loadBaked(app, url);
 }
 
 async function saveImage(jobID, url) {

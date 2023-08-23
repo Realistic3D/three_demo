@@ -21,7 +21,6 @@ function LoadModel(gltf, scene) {
     mesh.rotation.y = Math.PI/2;
     mesh.position.set(0,-1,-5);
     scene.add(mesh);
-
 }
 
 function loadRoomItems(scene) {
