@@ -2,7 +2,16 @@
 
 Basic demo for three.js
 
+* Bake with three.js
+
 ![alt bake-output](https://raw.githubusercontent.com/Realistic3D/raw/main/three_demo.gif)
+
+* Rendered with three.js
+
+<img src="https://raw.githubusercontent.com/Realistic3D/raw/main/three_render2.png" alt="render-output1" width="500" height="300">
+<img src="https://raw.githubusercontent.com/Realistic3D/raw/main/three_render.png" alt="render-output2" width="500" height="300">
+<img src="https://raw.githubusercontent.com/Realistic3D/raw/main/three_render.jpg" alt="render-output3" width="500" height="300">
+<img src="https://raw.githubusercontent.com/Realistic3D/raw/main/three_render3.png" alt="render-output3" width="500" height="300">
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -27,10 +36,10 @@ Basic demo for three.js
 
 To install and use this project, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/Realistic3D/three_demo.git`
-2. Navigate to the project directory: `cd three_demo`
-3. Install dependencies: `npm install`
-4. Run server: `npm run serve`
+1. `git clone https://github.com/Realistic3D/three_demo.git`
+2. `cd three_demo`
+3. `npm install`
+4. `npm run serve`
 
 ## Usage
 
@@ -44,7 +53,9 @@ The process is done in 4 basic steps.
 
 * ### Set your credentials
 
-You can set the script inside "[src](src)/[scripts](src/scripts)/[rest_tools.js](src/scripts/real_api_tools/rest_tools.js)"
+1. Login the official account at https://realistic3.com/ 
+2. Find you credentials such as `App Key`, `Instance ID` and `Product Key`
+3. You can set the credentials inside the script at "[src](src)/[scripts](src/scripts)/[rest_tools.js](src/scripts/real_api_tools/rest_tools.js)"
 
 ```javascript
 const InsID = <replace your instance ID>;
