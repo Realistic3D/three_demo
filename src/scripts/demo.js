@@ -1,7 +1,7 @@
 import * as REAL from "real_api";
 import {getThreeScene} from "@/scripts/three_tools/three_scene";
 import {loadDemoModel} from "@/scripts/three_tools/load_demo";
-import {loadAreaLights, loadSunLight} from "@/scripts/real_api_tools/real_lights";
+import {loadAreaLights, loadSunLight} from "@/scripts/real_api_tools/demo_lights";
 import {ConsoleError, ConsoleWarning} from "@/scripts/common_tools/console_tools";
 import {
     downloadImage,
@@ -10,7 +10,7 @@ import {
     newJobRequest,
     submitJob,
     uploadJob
-} from "@/scripts/real_api_tools/real_requests";
+} from "@/scripts/real_api_tools/rest_tools";
 import {loadBaked} from "@/scripts/three_tools/load_baked";
 
 
