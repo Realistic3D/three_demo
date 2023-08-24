@@ -2,6 +2,8 @@
 
 Basic demo for three.js
 
+![alt bake-output](https://raw.githubusercontent.com/Realistic3D/raw/main/three_demo.gif)
+
 ## Table of Contents
 - [Introduction](#introduction)
 - [Installation](#installation)
@@ -15,9 +17,6 @@ Basic demo for three.js
   - [Track only three.js jobs](#Track-only-threejs-job-status)
   - [Track all project's jobs](#Track-all-project-jobs)
 
-
-[//]: # (- [Contributing]&#40;#contributing&#41;)
-[//]: # (- [License]&#40;#license&#41;)
 
 ## Introduction
 
