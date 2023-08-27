@@ -8,14 +8,19 @@ export function loadAreaLights(scene) {
     const areaLight1 = new REAL.AreaLight(1, 2, new THREE.Color(0x3EBAF4), intensity);
     const areaLight2 = new REAL.AreaLight(3, 2, 0x27AE60, intensity);
     const areaLight3 = new REAL.AreaLight(1, 2, 0xCD5C5C, intensity);
+    const areaLight4 = new REAL.AreaLight(3, 2, 0x0088ff, intensity);
+
+    areaLight4.rotation.x = Math.PI/2;
 
     areaLight1.position.set(-2.5,0,zPos);
     areaLight2.position.set(0,0,zPos);
     areaLight3.position.set(2.5,0,zPos);
+    areaLight4.position.set(0,1,zPos + 1);
 
     scene.add(areaLight1);
     scene.add(areaLight2);
     scene.add(areaLight3);
+    scene.add(areaLight4);
 }
 
 export function loadSunLight(scene) {

@@ -10,7 +10,7 @@
   "dependencies": {
     "axios": "^1.4.0",
     "core-js": "^3.8.3",
-    "real_api": "^1.1.16",
+    "real_api": "^1.1.19",
     "three": "^0.155.0",
     "vue": "^3.2.13"
   },

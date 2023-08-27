@@ -71,6 +71,10 @@ export default {
       localStorage.setItem("mode", mode);
       localStorage.setItem("jobID", jobID);
     },
+    clearJob(){
+      localStorage.removeItem("mode");
+      localStorage.removeItem("jobID");
+    },
     async renderClicked(mode) {
       this.showUI = false;
       await renderScene(this, mode)

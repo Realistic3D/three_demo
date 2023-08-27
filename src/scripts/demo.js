@@ -52,7 +52,8 @@ export async function renderScene(app, renderMode) {
 export async function checkStatus(app) {
     const jobID = app.jobID;
     const response = await jobStatus(jobID);
-    app.setStatus(response.data.status);
+    if(response.data) app.setStatus(response.data.status);
+    else app.clearJob();
 }
 
 export async function downloadJob(app) {
