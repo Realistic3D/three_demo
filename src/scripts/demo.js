@@ -5,8 +5,7 @@ import {loadAreaLights, loadSunLight} from "@/scripts/real_api_tools/demo_lights
 import {ConsoleError, ConsoleWarning} from "@/scripts/common_tools/console_tools";
 import {
     downloadImage,
-    getJobResult,
-    jobStatus,
+    jobResult,
     newJobRequest,
     submitJob,
     uploadJob
@@ -51,7 +50,7 @@ export async function renderScene(app, renderMode) {
 
 export async function checkStatus(app) {
     const jobID = app.jobID;
-    const response = await jobStatus(jobID);
+    const response = await jobResult(jobID);
     if(response.data) app.setStatus(response.data.status);
     else app.clearJob();
 }
@@ -60,13 +59,13 @@ export async function downloadJob(app) {
     const mode = app.mode;
     const jobID = app.jobID;
     if(!jobID) return ConsoleWarning("No job");
-    const response = await getJobResult(jobID);
+    const response = await jobResult(jobID);
     if(!response || !response.data) return ConsoleError(response.msg);
     const data = response.data;
     const status = data.status;
     if(status !== "COMPLETED") return ConsoleWarning("Job is not completed yet!");
-    if(mode === "bake") await replaceBakedScene(app, data.url);
-    else await saveImage(jobID, data.url);
+    if(mode === "bake") await replaceBakedScene(app, data.result);
+    else await saveImage(jobID, data.result);
 }
 
 async function replaceBakedScene(app, url) {

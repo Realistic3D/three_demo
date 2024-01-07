@@ -7,7 +7,8 @@ export function loadDemoModel(scene, controls) {
 }
 
 function loadGltf(scene, controls) {
-    const modelPath = "./demo/simple.gltf";
+    // const modelPath = "./demo/simple.gltf";
+    const modelPath = "./demo/simple.glb";
     const loader = new GLTFLoader();
     loader.load(
         modelPath,

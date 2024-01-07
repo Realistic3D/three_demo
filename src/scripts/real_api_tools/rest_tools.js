@@ -4,23 +4,23 @@ import {ConsoleError} from "@/scripts/common_tools/console_tools";
 
 
 const InsID = 0;
-const AppKey = "TAwx5hhFykMO4Dzs8R7Q";
+const AppKey = "zPbOe4lHm0y7dEuRI2TX";
 const ProdKey = "6TOAi5skDgUP584nhe5s";
-const URL = `https://${REAL.Domain}/rapi/ask_service`;
+const URL = `https://${REAL.Domain}/rapi/render`;
 
 
 
 export async function newJobRequest(bakeMode) {
     const params = {
-        "prodCred": {
+        "cred": {
             "insID": InsID,
             "appKey": AppKey,
             "prodKey": ProdKey
         },
-        "ask": "new_job",
-        "renderParams": {
+        "type": "new",
+        "render": {
             "expFrom": "3js",
-            "bakeMode": bakeMode
+            "bake": bakeMode
         }
     }
     const response = await postResponse(params);
@@ -34,45 +34,26 @@ export async function uploadJob(uri, renderScene) {
 
 export async function submitJob(jobID) {
     const params = {
-        "prodCred": {
+        "cred": {
             "insID": InsID,
             "appKey": AppKey,
             "prodKey": ProdKey
         },
-        "ask": "submit",
-        "service": {
-            "jobID": jobID
-        }
+        "jobID": jobID,
+        "type": "render"
     }
     return await postResponse(params);
 }
 
-export async function jobStatus(jobID) {
+export async function jobResult(jobID) {
     const params = {
-        "prodCred": {
+        "cred": {
             "insID": InsID,
             "appKey": AppKey,
             "prodKey": ProdKey
         },
-        "ask": "status",
-        "service": {
-            "jobID": jobID
-        }
-    }
-    return await postResponse(params);
-}
-
-export async function getJobResult(jobID) {
-    const params = {
-        "prodCred": {
-            "insID": InsID,
-            "appKey": AppKey,
-            "prodKey": ProdKey
-        },
-        "ask": "result",
-        "service": {
-            "jobID": jobID
-        }
+        "jobID": jobID,
+        "type": "result"
     }
     return await postResponse(params);
 }
