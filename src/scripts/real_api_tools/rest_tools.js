@@ -4,8 +4,8 @@ import {ConsoleError} from "@/scripts/common_tools/console_tools";
 
 
 const InsID = 0;
-const AppKey = "zPbOe4lHm0y7dEuRI2TX";
-const ProdKey = "6TOAi5skDgUP584nhe5s";
+const AppKey = "<YOUR APP KEY>";
+const ProdKey = "<YOUR PRODUCT KEY>";
 const URL = `https://${REAL.Domain}/rapi/render`;
 
 
