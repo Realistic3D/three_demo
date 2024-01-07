@@ -2,6 +2,7 @@
 
 Basic demo for three.js
 
+* Full docs can be found at: https://docs.real-api.com/
 * Bake with three.js
 
 ![alt bake-output](https://raw.githubusercontent.com/Realistic3D/raw/main/three_demo.gif)
@@ -29,7 +30,7 @@ Basic demo for three.js
 
 ## Introduction
 
-* This is very basic demo of how you can use [RealAPI](https://realistic3.com/) for three.js with simple [REST](https://docs.realistic3.com/using-rest-api-calls) requests in order to `render` or `bake` your scene.
+* This is very basic demo of how you can use [RealAPI](https://realistic3.com/) for three.js with simple [REST](https://docs.real-api.com/en/rest-api) requests in order to `render` or `bake` your scene.
 * I didn't include any `Websocket` in this project as I want to just demonstrate the basic idea of how it works
 
 ## Installation
@@ -47,8 +48,7 @@ The process is done in 4 basic steps.
 
 1. Create `new_job`
 2. Upload job
-3. `submit` job
-4. Get `result`
+3. `render` and get `result`
 
 
 * ### Set your credentials
@@ -68,15 +68,15 @@ const URL = `https://${REAL.Domain}/rapi/ask_service`;
 ```javascript
 export async function newJobRequest(bakeMode) {
     const params = {
-        "prodCred": {
-            "insID": InsID,
-            "appKey": AppKey,
-            "prodKey": ProdKey
+        "cred": {
+          "insID": InsID,
+          "appKey": AppKey,
+          "prodKey": ProdKey
         },
-        "ask": "new_job",
-        "renderParams": {
-            "expFrom": "3js",
-            "bakeMode": bakeMode
+        "type": "new",
+        "render": {
+          "expFrom": "3js",
+          "bake": bakeMode
         }
     }
     const response = await postResponse(params);
@@ -95,60 +95,39 @@ export async function uploadJob(uri, renderScene) {
 ```javascript
 export async function submitJob(jobID) {
     const params = {
-        "prodCred": {
-            "insID": InsID,
-            "appKey": AppKey,
-            "prodKey": ProdKey
-        },
-        "ask": "submit",
-        "service": {
-            "jobID": jobID
-        }
+      "cred": {
+        "insID": InsID,
+        "appKey": AppKey,
+        "prodKey": ProdKey
+      },
+      "jobID": jobID,
+      "type": "render"
     }
     return await postResponse(params);
 }
 ```
 
-### 4. Get result
+### 4. Check job status or Get job result
 ```javascript
-export async function getJobResult(jobID) {
-    const params = {
-        "prodCred": {
-            "insID": InsID,
-            "appKey": AppKey,
-            "prodKey": ProdKey
-        },
-        "ask": "result",
-        "service": {
-            "jobID": jobID
-        }
-    }
-    return await postResponse(params);
+export async function jobResult(jobID) {
+  const params = {
+    "cred": {
+      "insID": InsID,
+      "appKey": AppKey,
+      "prodKey": ProdKey
+    },
+    "jobID": jobID,
+    "type": "result"
+  }
+  return await postResponse(params);
 }
 ```
 
-### Check job status with REST API
-```javascript
-export async function jobStatus(jobID) {
-    const params = {
-        "prodCred": {
-            "insID": InsID,
-            "appKey": AppKey,
-            "prodKey": ProdKey
-        },
-        "ask": "status",
-        "service": {
-            "jobID": jobID
-        }
-    }
-    return await postResponse(params);
-}
-```
 
 ### Check live job status with socket
 * ### Track only three.js job status:
 
-`wss://app.real-api.online/login?app_key=<app_key>&prod_key=<prod_key>&ins_id=<ins_id>&exp_from=3js`
+`wss://app.real-api.online/realAPI?app_key=<app_key>&prod_key=<prod_key>&ins_id=<ins_id>&exp_from=3js`
 
 * ### Track all project jobs:
 `wss://app.real-api.online/login?app_key=<app_key>&prod_key=<prod_key>&ins_id=<ins_id>`
